@@ -36,7 +36,7 @@ Template.spreadsheet.onRendered(function () {
     ['Triple Crown', '','','','','','rowTotal','NA','NA','NA','NA','NA', '','','','','','rowTotal', 'NA'],
     ['VMD - Private Stock', '','','','','','rowTotal','NA','NA','NA','NA','NA', '','','','','','rowTotal', 'NA'],
     ['Total Bottles', 'NA','NA','NA','NA','NA','colTotal','colTotal', 'NA','NA','NA', 'colTotal', 'NA','NA','NA','NA','NA','colTotal','colTotal'],
-    ['=SUM(B34:S34)', '', '', '=IF(SUM(B34:S34) > 49, "Minimum Bottle Requirement Reached", "NOT ENOUGH BOTTLES TO PLACE ORDER - Minimum Bottles: 50")'],
+    ['totalBottles', '', '', '=IF(SUM(B34:S34) > 49, "Minimum Bottle Requirement Reached", "NOT ENOUGH BOTTLES TO PLACE ORDER - Minimum Bottles: 50")'],
     ['Totals (Not a final invoice, does not include shipping)', '', '','','', '', '', 'Price Tiers:', '15ML', '30ML'],
     ['15ML Premium Liquids', '=IF(SUM(G34,H34,L34,R34,S34)>4999, H34 * 4.5, IF(SUM(G34,H34,L34,R34,S34) > 2499, H34 * 4.75, IF(SUM(G34,H34,L34,R34,S34) > 999, H34 * 4.85, IF(SUM(G34,H34,L34,R34,S34) > 249, H34 * 5.00, IF(SUM(G34,H34,L34,R34,S34) > 49, H34 * 5.25, 0)))))','', 'Current Tier','','=IF(SUM(G34,H34,L34,R34,S34)>4999, "5000+", IF(SUM(G34,H34,L34,R34,S34) > 2499, "2500-4999", IF(SUM(G34,H34,L34,R34,S34) > 999, "1000-2499", IF(SUM(G34,H34,L34,R34,S34) > 249, "250-999", IF(SUM(G34,H34,L34,R34,S34) > 49, "50-249", "NA")))))',  '', '50-249', '$5.25', '$7.85'],
     ['30ML Premium Liquids', '=IF(SUM(G34,H34,L34,R34,S34)>4999, S34 * 4.5, IF(SUM(G34,H34,L34,R34,S34) > 2499, S34 * 4.75, IF(SUM(G34,H34,L34,R34,S34) > 999, S34 * 4.85, IF(SUM(G34,H34,L34,R34,S34) > 249, S34 * 5.00, IF(SUM(G34,H34,L34,R34,S34) > 49, S34 * 5.25, 0)))))', '', 'Bottles For Next Tier','','=IF(SUM(G34,H34,L34,R34,S34)>4999, "NA", IF(SUM(G34,H34,L34,R34,S34) > 2499, 5000 - SUM(G34,H34,L34,R34,S34), IF(SUM(G34,H34,L34,R34,S34) > 999, 2500 - SUM(G34,H34,L34,R34,S34), IF(SUM(G34,H34,L34,R34,S34) > 249, 1000 - SUM(G34,H34,L34,R34,S34), IF(SUM(G34,H34,L34,R34,S34) > 49, 250 - SUM(G34,H34,L34,R34,S34), 50 - SUM(G34,H34,L34,R34,S34))))))', '', '250-999', '$5.00', '$7.50'],
@@ -56,14 +56,6 @@ Template.spreadsheet.onRendered(function () {
       td.style.color = '#333';
     }
 
-    if(value == 'Minimum Bottle Requirement Reached') {
-      td.style.background = '#51A351';
-    }
-
-    if(value == 'NOT ENOUGH BOTTLES TO PLACE ORDER - Minimum Bottles: 50') {
-      td.style.background = '#BD362F';
-    }
-
     if(value == 'Oak Age Blend - 15 & 30 ml Bottles') {
       td.style.background = 'darkOrange';
     }
@@ -74,13 +66,13 @@ Template.spreadsheet.onRendered(function () {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
     total = 0;
     var numRows = row;
-    if(column === 6 || column === 17) {
+    if(col === 6 || col === 17) {
       numRows = 5;
     }
     for(i = row - numRows; i < row; i++) {
-      total += parseInt(instance.getDataAtCell(i,column)) || 0;
+      total += parseInt(instance.getDataAtCell(i,col)) || 0;
     }
-    data[row][column] = total;
+    data[row][col] = total;
     td.innerHTML = total;
   }
 
@@ -89,24 +81,36 @@ Template.spreadsheet.onRendered(function () {
 
     total = 0;
     var cell = 0;
-    if(column === 7 || column === 18) {
+    if(col === 7 || col === 18) {
       var numColumns = 6;
-    } else if (column === 11) {
+    } else if (col === 11) {
       var numColumns = 3;
     } else {
       var numColumns = 5;
     }
-    for(i = column - numColumns; i < column; i++) {
+    for(i = col - numColumns; i < col; i++) {
       cell = parseInt(instance.getDataAtCell(row,i)) || 0;
       total += cell;
     }
-    data[row][column] = total;
+    data[row][col] = total;
+    td.innerHTML = total;
+  }
+
+  function totalBottleRenderer(instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
+    var total = 0;
+    var numCols = instance.countCols();
+    for (i = 0; i < numCols; i++) {
+      total += parseInt(instance.getDataAtCell(row-1, i)) || 0;
+    }
+    data[row][col] = total;
     td.innerHTML = total;
   }
 
   Handsontable.renderers.registerRenderer('valueRenderer', valueRenderer);
   Handsontable.renderers.registerRenderer('rowTotalRenderer', rowTotalRenderer);
   Handsontable.renderers.registerRenderer('colTotalRenderer', colTotalRenderer);
+  Handsontable.renderers.registerRenderer('totalBottleRenderer', totalBottleRenderer);
 
   spreadsheet.handsontable({
     data: data,
@@ -166,12 +170,14 @@ Template.spreadsheet.onRendered(function () {
       if(this.instance.getData()[row][col] === 'rowTotal') {
         cellProperties.renderer = "rowTotalRenderer";
         cellProperties.readOnly = true;
-
       }
       if(this.instance.getData()[row][col] === 'colTotal') {
         cellProperties.renderer = "colTotalRenderer";
         cellProperties.readOnly = true;
-
+      }
+      if(this.instance.getData()[row][col] === 'totalBottles') {
+        cellProperties.renderer = "totalBottleRenderer";
+        cellProperties.readOnly = true;
       }
 
       if (this.instance.getData()[row][col] == 'NOT ENOUGH BOTTLES TO PLACE ORDER - Minimum Bottles: 50') {
