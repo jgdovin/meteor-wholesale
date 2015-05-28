@@ -114,10 +114,49 @@ Template.spreadsheet.onRendered(function () {
     if(instance.getDataAtCell(34,0) >= 50) {
       td.innerHTML = "Minimum Bottle Requirement Reached";
       td.style.background = "#51A351";
+      $('[data-action="saveOrder"]').prop("disabled",false);
     } else {
       td.innerHTML = "NOT ENOUGH BOTTLES TO PLACE ORDER - Minimum Bottles: 50";
       td.style.background = "#BD362F";
+      $('[data-action="saveOrder"]').prop("disabled",true);
     }
+  }
+
+  function smallPrice(instance, td, row, col, prop, value, cellProperties) {
+    var bottles = parseInt(instance.getDataAtCell(33, 7));
+    var totalBottles = parseInt(instance.getDataAtCell(34,0));
+    var price = 5.25;
+    if(totalBottles >= 5000) {
+      price = 4.50;
+    } else if (totalBottles >= 2500) {
+      price = 4.75;
+    } else if (totalBottles >= 1000) {
+      price = 4.85;
+    } else if (totalBottles >= 250) {
+      price = 5.00;
+    }
+    var total = price * bottles;
+    data[row][col] = 0;
+  }
+
+  function largePrice(instance, td, row, col, prop, value, cellProperties) {
+
+  }
+
+  function dripperPrice(instance, td, row, col, prop, value, cellProperties) {
+
+  }
+
+  function smallOakPrice(instance, td, row, col, prop, value, cellProperties) {
+
+  }
+
+  function largeOakPrice(instance, td, row, col, prop, value, cellProperties) {
+
+  }
+
+  function totalPrice(instance, td, row, col, prop, value, cellProperties) {
+
   }
 
   Handsontable.renderers.registerRenderer('valueRenderer', valueRenderer);
@@ -133,9 +172,6 @@ Template.spreadsheet.onRendered(function () {
     contextMenu: false,
     formulas: true,
     colWidths: [280, 60, 60, 60, 60, 70, 60, 80, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60],
-    afterValidate: function(isValid, value, row, prop, source) {
-      console.log(isValid);
-    },
     beforeChange: function(changes, source) {
       for (var i = changes.length - 1; i >= 0; i--) {
         if(changes[i][1] >= 1 && changes[i][1] <= 6 && changes[i][0] >= 2 && changes[i][0] <= 26) {
