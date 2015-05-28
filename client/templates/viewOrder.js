@@ -4,7 +4,6 @@ Template.viewOrder.onCreated(function() {
 
 Template.viewOrder.onRendered(function () {
   var currentOrder = Orders.findOne();
-  console.log(currentOrder);
   var template = Template.instance();
   var spreadsheet = template.$('#wholesale');
   var data = currentOrder.order;
@@ -63,7 +62,8 @@ Template.viewOrder.onRendered(function () {
       {row: 0, col: 12, rowspan: 1, colspan: 7},
       {row: 27, col: 0, rowspan: 1, colspan: 19},
       {row: 36, col: 3, rowspan: 1, colspan: 2},
-      {row: 37, col: 3, rowspan: 1, colspan: 2}
+      {row: 37, col: 3, rowspan: 1, colspan: 2},
+      {row: 34, col: 3, rowspan: 1, colspan: 6}
     ],
     cells: function(row, col, prop) {
       var cellProperties = {};
@@ -81,13 +81,8 @@ Template.viewOrder.onRendered(function () {
         cellProperties.renderer = "valueRenderer";
         cellProperties.readOnly = true;
       }
-      var cellData = this.instance.getData()[row][col];
-      if(typeof cellData === 'string') {
-        if(cellData.includes('SUM')) {
-          cellProperties.readOnly = true;
-        }
-      }
 
+      cellProperties.readOnly = true;
       return cellProperties;
     },
     cell: [

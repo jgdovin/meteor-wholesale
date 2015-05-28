@@ -120,6 +120,7 @@ Template.spreadsheet.onRendered(function () {
       td.style.background = "#BD362F";
       $('[data-action="saveOrder"]').prop("disabled",true);
     }
+    data[row][col] = td.innerHTML;
   }
 
   function smallPriceRenderer(instance, td, row, col, prop, value, cellProperties) {
@@ -137,7 +138,7 @@ Template.spreadsheet.onRendered(function () {
       price = 5.00;
     }
     var total = price * bottles;
-    data[row][col] = accounting.formatNumber(total, 2);
+    data[row][col] = accounting.formatNumber(total, 2, '');
     td.innerHTML = accounting.formatMoney(total);
   }
 
@@ -156,7 +157,7 @@ Template.spreadsheet.onRendered(function () {
       price = 7.50;
     }
     var total = price * bottles;
-    data[row][col] = accounting.formatNumber(total, 2);
+    data[row][col] = accounting.formatNumber(total, 2, '');
     td.innerHTML = accounting.formatMoney(total);
   }
 
@@ -164,7 +165,7 @@ Template.spreadsheet.onRendered(function () {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
     var bottles = parseInt(instance.getDataAtCell(33, 11));
     total = bottles * 8.50;
-    data[row][col] = accounting.formatNumber(total, 2);
+    data[row][col] = accounting.formatNumber(total, 2, '');
     td.innerHTML = accounting.formatMoney(total);
   }
 
@@ -172,7 +173,7 @@ Template.spreadsheet.onRendered(function () {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
     var bottles = parseInt(instance.getDataAtCell(33, 6));
     total = bottles * 7;
-    data[row][col] = accounting.formatNumber(total, 2);
+    data[row][col] = accounting.formatNumber(total, 2, '');
     td.innerHTML = accounting.formatMoney(total);
   }
 
@@ -180,7 +181,7 @@ Template.spreadsheet.onRendered(function () {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
     var bottles = parseInt(instance.getDataAtCell(33, 17));
     total = bottles * 10;
-    data[row][col] = accounting.formatNumber(total, 2);
+    data[row][col] = accounting.formatNumber(total, 2, '');
     td.innerHTML = accounting.formatMoney(total);
   }
 
@@ -304,13 +305,7 @@ Template.spreadsheet.onRendered(function () {
         cellProperties.className = 'test';
         console.log(prop);
       }
-      var cellData = this.instance.getData()[row][col];
-      if(typeof cellData === 'string') {
-        if(cellData.includes('SUM')) {
-          cellProperties.readOnly = true;
-        }
-      }
-
+      
       return cellProperties;
     },
     cell: [
@@ -321,8 +316,12 @@ Template.spreadsheet.onRendered(function () {
   var ssInstance = $('#wholesale').handsontable('getInstance');
 
   $('[data-action="saveOrder"]').on('click', function() {
-    console.log(columnTotal(33, 7, ssInstance));
-    //Orders.insert({order : ssInstance.getData()});
+    var total = 0;
+    for (i=36; i < 41; i++) {
+      total += parseFloat(ssInstance.getDataAtCell(i,1)) || 0;
+    }
+    var orderId = Orders.insert({order : ssInstance.getData(), total: total, numBottles: ssInstance.getDataAtCell(34,0)});
+    Router.go('/orders/view/' + orderId);
   });
 
   $('#test2').on('click', function() {
