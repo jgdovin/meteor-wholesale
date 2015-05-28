@@ -1,0 +1,14 @@
+<template name="orders">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">Orders</div>
+      <div class="panel-body">
+        <ul>
+          {{#each orders}}
+            <li><a href="/orders/view/{{_id}}">{{formatTime createdAt}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>

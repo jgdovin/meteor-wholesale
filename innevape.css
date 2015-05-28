@@ -1,0 +1,16 @@
+#wholesale {
+    font-size: .8em;
+}
+.aged {
+    font-weight: bold;
+}
+
+body {
+    padding-top: 70px;
+    /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.btn-margin {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
