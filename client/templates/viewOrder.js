@@ -91,6 +91,7 @@ Template.viewOrder.onRendered(function () {
   });
 
   var ssInstance = $('#wholesale').handsontable('getInstance');
+  $('#wholesale').find('table').addClass('zebraStyle');
 
   $('[data-action="saveOrder"]').on('click', function() {
     Orders.insert({order : ssInstance.getData()});

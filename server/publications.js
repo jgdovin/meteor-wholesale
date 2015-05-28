@@ -5,3 +5,10 @@ Meteor.publish('orders', function(limiter) {
   }
   return Orders.find();
 });
+
+Meteor.publish('userData', function() {
+  if(!this.userId) return null;
+  return Meteor.users.find(this.userId, {fields: {
+    isAdmin: 1,
+  }});
+});

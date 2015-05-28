@@ -246,7 +246,7 @@ Template.spreadsheet.onRendered(function () {
     cells: function(row, col, prop) {
       var cellProperties = {};
       cellProperties.style = {};
-      if (row === 0 && col === 0) {
+      if (row % 2 === 0) {
 
       }
 
@@ -301,11 +301,6 @@ Template.spreadsheet.onRendered(function () {
         cellProperties.readOnly = true;
       }
 
-      if (this.instance.getData()[row][col] == 'NOT ENOUGH BOTTLES TO PLACE ORDER - Minimum Bottles: 50') {
-        cellProperties.className = 'test';
-        console.log(prop);
-      }
-      
       return cellProperties;
     },
     cell: [
@@ -314,7 +309,7 @@ Template.spreadsheet.onRendered(function () {
   });
 
   var ssInstance = $('#wholesale').handsontable('getInstance');
-
+  $('#wholesale').find('table').addClass('zebraStyle');
   $('[data-action="saveOrder"]').on('click', function() {
     var total = 0;
     for (i=36; i < 41; i++) {

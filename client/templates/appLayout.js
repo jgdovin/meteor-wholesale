@@ -1,5 +1,9 @@
-Template.appLayout.events({
-  "click [data-action=placeOrder]" : function() {
-    console.log('test');
+Deps.autorun(function() {
+  Meteor.subscribe('userData');
+});
+
+Template.appLayout.helpers({
+  isAdmin: function() {
+    return Meteor.user().isAdmin;
   }
 });

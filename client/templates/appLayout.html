@@ -14,16 +14,21 @@
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
         {{#if currentUser}}
           <ul class="nav navbar-nav">
+            {{#if isAdmin}}
+              <li><a href="/orders/viewAll" data-action="viewAllOrders">View Customer Orders</a></li>
+            {{/if}}
             <li>
-              <a href="/orders/view" data-action="viewOrders">View Orders</a>
+              <a href="/orders/view" data-action="viewOrders">My Orders</a>
             </li>
             <li>
-              <a href="/orders/new" data-action="placeOrder">Place Order</a>
+              <a href="/orders/new" data-action="placeOrder">New Order</a>
             </li>
           </ul>
         {{/if}}
+
         <ul class="nav navbar-nav navbar-right">
           {{> loginButtons}} <!-- here -->
         </ul>
