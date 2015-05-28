@@ -46,37 +46,6 @@ Template.spreadsheet.onRendered(function () {
     ['TOTAL PRICE', '=SUM(B37:B41)']
 
   ];
-  var rowTotals = [];
-  function rowTotal(row, column, instance) {
-    total = 0;
-    var cell = 0;
-    if(column === 7 || column === 18) {
-      var numColumns = 6;
-    } else if (column === 11) {
-      var numColumns = 3;
-    } else {
-      var numColumns = 5;
-    }
-    for(i = column - numColumns; i < column; i++) {
-      cell = parseInt(instance.getDataAtCell(row,i)) || 0;
-      total += cell;
-    }
-    data[row][column] = total;
-    return total;
-  }
-
-  function columnTotal(row,column,instance) {
-    total = 0;
-    var numRows = row;
-    if(column === 6 || column === 17) {
-      numRows = 5;
-    }
-    for(i = row - numRows; i < row; i++) {
-      total += parseInt(instance.getDataAtCell(i,column)) || 0;
-    }
-    data[row][column] = total;
-    return total;
-  }
 
   function valueRenderer(instance, td, row, col, prop, value, cellProperties) {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
@@ -103,13 +72,35 @@ Template.spreadsheet.onRendered(function () {
 
   function colTotalRenderer(instance, td, row, col, prop, value, cellProperties) {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
-    var total = columnTotal(row, col, instance);
+    total = 0;
+    var numRows = row;
+    if(column === 6 || column === 17) {
+      numRows = 5;
+    }
+    for(i = row - numRows; i < row; i++) {
+      total += parseInt(instance.getDataAtCell(i,column)) || 0;
+    }
+    data[row][column] = total;
     td.innerHTML = total;
   }
 
   function rowTotalRenderer(instance, td, row, col, prop, value, cellProperties) {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
-    var total = rowTotal(row, col, instance);
+
+    total = 0;
+    var cell = 0;
+    if(column === 7 || column === 18) {
+      var numColumns = 6;
+    } else if (column === 11) {
+      var numColumns = 3;
+    } else {
+      var numColumns = 5;
+    }
+    for(i = column - numColumns; i < column; i++) {
+      cell = parseInt(instance.getDataAtCell(row,i)) || 0;
+      total += cell;
+    }
+    data[row][column] = total;
     td.innerHTML = total;
   }
 
