@@ -38,12 +38,12 @@ Template.spreadsheet.onRendered(function () {
     ['Total Bottles', 'NA','NA','NA','NA','NA','colTotal','colTotal', 'NA','NA','NA', 'colTotal', 'NA','NA','NA','NA','NA','colTotal','colTotal'],
     ['totalBottles', '', '', 'enoughBottles'],
     ['Totals (Not a final invoice, does not include shipping)', '', '','','', '', '', 'Price Tiers:', '15ML', '30ML'],
-    ['15ML Premium Liquids', '=IF(SUM(G34,H34,L34,R34,S34)>4999, H34 * 4.5, IF(SUM(G34,H34,L34,R34,S34) > 2499, H34 * 4.75, IF(SUM(G34,H34,L34,R34,S34) > 999, H34 * 4.85, IF(SUM(G34,H34,L34,R34,S34) > 249, H34 * 5.00, IF(SUM(G34,H34,L34,R34,S34) > 49, H34 * 5.25, 0)))))','', 'Current Tier','','=IF(SUM(G34,H34,L34,R34,S34)>4999, "5000+", IF(SUM(G34,H34,L34,R34,S34) > 2499, "2500-4999", IF(SUM(G34,H34,L34,R34,S34) > 999, "1000-2499", IF(SUM(G34,H34,L34,R34,S34) > 249, "250-999", IF(SUM(G34,H34,L34,R34,S34) > 49, "50-249", "NA")))))',  '', '50-249', '$5.25', '$7.85'],
-    ['30ML Premium Liquids', '=IF(SUM(G34,H34,L34,R34,S34)>4999, S34 * 4.5, IF(SUM(G34,H34,L34,R34,S34) > 2499, S34 * 4.75, IF(SUM(G34,H34,L34,R34,S34) > 999, S34 * 4.85, IF(SUM(G34,H34,L34,R34,S34) > 249, S34 * 5.00, IF(SUM(G34,H34,L34,R34,S34) > 49, S34 * 5.25, 0)))))', '', 'Bottles For Next Tier','','=IF(SUM(G34,H34,L34,R34,S34)>4999, "NA", IF(SUM(G34,H34,L34,R34,S34) > 2499, 5000 - SUM(G34,H34,L34,R34,S34), IF(SUM(G34,H34,L34,R34,S34) > 999, 2500 - SUM(G34,H34,L34,R34,S34), IF(SUM(G34,H34,L34,R34,S34) > 249, 1000 - SUM(G34,H34,L34,R34,S34), IF(SUM(G34,H34,L34,R34,S34) > 49, 250 - SUM(G34,H34,L34,R34,S34), 50 - SUM(G34,H34,L34,R34,S34))))))', '', '250-999', '$5.00', '$7.50'],
-    ['Dripper Fuel', '=L34 * 8.50', '', '', '', '','', '1000-2499', '$4.85', '$7.35'],
-    ['15ML Oak Aged', '=G34 * 7.00', '', '', '', '','', '2500-4999', '$4.75', '$7.20'],
-    ['30ML Oak Aged', '=R34 * 10.00', '', '', '', '','', '5000+', '$4.50', '$7.05'],
-    ['TOTAL PRICE', '=SUM(B37:B41)']
+    ['15ML Premium Liquids', 'smallPrice','', 'Current Tier','','=IF(SUM(G34,H34,L34,R34,S34)>4999, "5000+", IF(SUM(G34,H34,L34,R34,S34) > 2499, "2500-4999", IF(SUM(G34,H34,L34,R34,S34) > 999, "1000-2499", IF(SUM(G34,H34,L34,R34,S34) > 249, "250-999", IF(SUM(G34,H34,L34,R34,S34) > 49, "50-249", "NA")))))',  '', '50-249', '$5.25', '$7.85'],
+    ['30ML Premium Liquids', 'largePrice', '', 'Bottles For Next Tier','','=IF(SUM(G34,H34,L34,R34,S34)>4999, "NA", IF(SUM(G34,H34,L34,R34,S34) > 2499, 5000 - SUM(G34,H34,L34,R34,S34), IF(SUM(G34,H34,L34,R34,S34) > 999, 2500 - SUM(G34,H34,L34,R34,S34), IF(SUM(G34,H34,L34,R34,S34) > 249, 1000 - SUM(G34,H34,L34,R34,S34), IF(SUM(G34,H34,L34,R34,S34) > 49, 250 - SUM(G34,H34,L34,R34,S34), 50 - SUM(G34,H34,L34,R34,S34))))))', '', '250-999', '$5.00', '$7.50'],
+    ['Dripper Fuel', 'dripperPrice', '', '', '', '','', '1000-2499', '$4.85', '$7.35'],
+    ['15ML Oak Aged', 'smallOakPrice', '', '', '', '','', '2500-4999', '$4.75', '$7.20'],
+    ['30ML Oak Aged', 'largeOakPrice', '', '', '', '','', '5000+', '$4.50', '$7.05'],
+    ['TOTAL PRICE', 'totalPrice']
 
   ];
 
@@ -122,7 +122,8 @@ Template.spreadsheet.onRendered(function () {
     }
   }
 
-  function smallPrice(instance, td, row, col, prop, value, cellProperties) {
+  function smallPriceRenderer(instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
     var bottles = parseInt(instance.getDataAtCell(33, 7));
     var totalBottles = parseInt(instance.getDataAtCell(34,0));
     var price = 5.25;
@@ -136,27 +137,61 @@ Template.spreadsheet.onRendered(function () {
       price = 5.00;
     }
     var total = price * bottles;
-    data[row][col] = 0;
+    data[row][col] = accounting.formatNumber(total, 2);
+    td.innerHTML = accounting.formatMoney(total);
   }
 
-  function largePrice(instance, td, row, col, prop, value, cellProperties) {
-
+  function largePriceRenderer(instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
+    var bottles = parseInt(instance.getDataAtCell(33, 18));
+    var totalBottles = parseInt(instance.getDataAtCell(34,0));
+    var price = 7.85;
+    if(totalBottles >= 5000) {
+      price = 7.05;
+    } else if (totalBottles >= 2500) {
+      price = 7.20;
+    } else if (totalBottles >= 1000) {
+      price = 7.35;
+    } else if (totalBottles >= 250) {
+      price = 7.50;
+    }
+    var total = price * bottles;
+    data[row][col] = accounting.formatNumber(total, 2);
+    td.innerHTML = accounting.formatMoney(total);
   }
 
-  function dripperPrice(instance, td, row, col, prop, value, cellProperties) {
-
+  function dripperPriceRenderer(instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
+    var bottles = parseInt(instance.getDataAtCell(33, 11));
+    total = bottles * 8.50;
+    data[row][col] = accounting.formatNumber(total, 2);
+    td.innerHTML = accounting.formatMoney(total);
   }
 
-  function smallOakPrice(instance, td, row, col, prop, value, cellProperties) {
-
+  function smallOakPriceRenderer(instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
+    var bottles = parseInt(instance.getDataAtCell(33, 6));
+    total = bottles * 7;
+    data[row][col] = accounting.formatNumber(total, 2);
+    td.innerHTML = accounting.formatMoney(total);
   }
 
-  function largeOakPrice(instance, td, row, col, prop, value, cellProperties) {
-
+  function largeOakPriceRenderer(instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
+    var bottles = parseInt(instance.getDataAtCell(33, 17));
+    total = bottles * 10;
+    data[row][col] = accounting.formatNumber(total, 2);
+    td.innerHTML = accounting.formatMoney(total);
   }
 
-  function totalPrice(instance, td, row, col, prop, value, cellProperties) {
-
+  function totalPriceRenderer(instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
+    var total = 0;
+    for (i=row - 5; i < row; i++) {
+      total += parseFloat(instance.getDataAtCell(i,1)) || 0;
+    }
+    data[row][col] = accounting.formatNumber(total, 2);
+    td.innerHTML = accounting.formatMoney(total);
   }
 
   Handsontable.renderers.registerRenderer('valueRenderer', valueRenderer);
@@ -164,6 +199,12 @@ Template.spreadsheet.onRendered(function () {
   Handsontable.renderers.registerRenderer('colTotalRenderer', colTotalRenderer);
   Handsontable.renderers.registerRenderer('totalBottleRenderer', totalBottleRenderer);
   Handsontable.renderers.registerRenderer('enoughBottlesRenderer', enoughBottlesRenderer);
+  Handsontable.renderers.registerRenderer('smallPriceRenderer', smallPriceRenderer);
+  Handsontable.renderers.registerRenderer('largePriceRenderer', largePriceRenderer);
+  Handsontable.renderers.registerRenderer('dripperPriceRenderer', dripperPriceRenderer);
+  Handsontable.renderers.registerRenderer('smallOakPriceRenderer', smallOakPriceRenderer);
+  Handsontable.renderers.registerRenderer('largeOakPriceRenderer', largeOakPriceRenderer);
+  Handsontable.renderers.registerRenderer('totalPriceRenderer', totalPriceRenderer);
 
   spreadsheet.handsontable({
     data: data,
@@ -231,6 +272,31 @@ Template.spreadsheet.onRendered(function () {
       }
       if(this.instance.getData()[row][col] === 'enoughBottles') {
         cellProperties.renderer = "enoughBottlesRenderer";
+        cellProperties.readOnly = true;
+      }
+
+      if(this.instance.getData()[row][col] === 'smallPrice') {
+        cellProperties.renderer = "smallPriceRenderer";
+        cellProperties.readOnly = true;
+      }
+      if(this.instance.getData()[row][col] === 'largePrice') {
+        cellProperties.renderer = "largePriceRenderer";
+        cellProperties.readOnly = true;
+      }
+      if(this.instance.getData()[row][col] === 'dripperPrice') {
+        cellProperties.renderer = "dripperPriceRenderer";
+        cellProperties.readOnly = true;
+      }
+      if(this.instance.getData()[row][col] === 'smallOakPrice') {
+        cellProperties.renderer = "smallOakPriceRenderer";
+        cellProperties.readOnly = true;
+      }
+      if(this.instance.getData()[row][col] === 'largeOakPrice') {
+        cellProperties.renderer = "largeOakPriceRenderer";
+        cellProperties.readOnly = true;
+      }
+      if(this.instance.getData()[row][col] === 'totalPrice') {
+        cellProperties.renderer = "totalPriceRenderer";
         cellProperties.readOnly = true;
       }
 
