@@ -5,7 +5,7 @@
       <div class="panel-body">
         <ul>
           {{#each orders}}
-            <li><a href="/orders/view/{{_id}}">{{formatTime createdAt}}</a></li>
+            <li><a href="/orders/view/{{_id}}">{{formatTime createdAt}}</a> - {{total}}</li>
           {{/each}}
         </ul>
       </div>

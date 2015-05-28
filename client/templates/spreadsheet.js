@@ -315,7 +315,7 @@ Template.spreadsheet.onRendered(function () {
     for (i=36; i < 41; i++) {
       total += parseFloat(ssInstance.getDataAtCell(i,1)) || 0;
     }
-    var orderId = Orders.insert({order : ssInstance.getData(), total: total, numBottles: ssInstance.getDataAtCell(34,0)});
+    var orderId = Orders.insert({order : ssInstance.getData(), orderId: '', status: 'pending', total: total, numBottles: ssInstance.getDataAtCell(34,0)});
     Router.go('/orders/view/' + orderId);
   });
 

@@ -14,3 +14,5 @@ iron:router
 matb33:collection-hooks
 momentjs:moment
 lepozepo:accounting
+aldeed:tabular
+reactive-var
