@@ -4,9 +4,7 @@
       <div class="panel-heading">Orders</div>
       <div class="panel-body">
         <ul>
-          {{#each orders}}
-            <li><a href="/orders/view/{{_id}}">{{formatTime createdAt}}</a> - {{total}}</li>
-          {{/each}}
+          {{> tabular table=TabularTables.myOrders class="table table-striped table-bordered table-condensed"}}
         </ul>
       </div>
     </div>

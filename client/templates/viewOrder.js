@@ -1,12 +1,12 @@
-Template.viewOrder.onCreated(function() {
-  this.subscribe('orders', Meteor.userId());
-});
-
 Template.viewOrder.onRendered(function () {
+
   var currentOrder = Orders.findOne();
+
   var template = Template.instance();
+
   var spreadsheet = template.$('#wholesale');
   var data = currentOrder.order;
+  console.log(currentOrder);
   function valueRenderer(instance, td, row, col, prop, value, cellProperties) {
 
     if(value == 'NA') {

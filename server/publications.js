@@ -1,14 +1,16 @@
 // publish posts
-Meteor.publish('orders', function(limiter) {
-  if(limiter) {
-    return Orders.find(limiter);
-  }
-  return Orders.find();
+Meteor.publish('ordersById', function(limiter) {
+  check(limiter, String);
+  return Orders.find({ _id : limiter });
+});
+
+Meteor.publish('myOrders', function() {
+  return Orders.find({owner: this.userId}, {fields: {order: false}});
 });
 
 Meteor.publish('userData', function() {
   if(!this.userId) return null;
   return Meteor.users.find(this.userId, {fields: {
-    isAdmin: 1,
+    isAdmin: 1
   }});
 });
