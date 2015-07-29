@@ -2,7 +2,7 @@ Template.spreadsheet.onRendered(function () {
   var template = Template.instance();
   var spreadsheet = template.$('#wholesale');
   var data = [
-    [Meteor.user().profile['company-name'], "15 ML Bottles", "", "", "", "", "", "", "Dripper Fuel", "", "", "", "30 ML Bottles", "", "", "", "", "", ""],
+    [Meteor.user().profile['companyName'], "15 ML Bottles", "", "", "", "", "", "", "Dripper Fuel", "", "", "", "30 ML Bottles", "", "", "", "", "", ""],
     [moment().format('MM-DD-YYYY'), '0 MG', '3 MG', '6 MG', '12 MG', '18 MG', '24 MG', 'Total', '0 DF', '3 DF', '6 DF', 'Total', '0 MG', '3 MG', '6 MG', '12 MG', '18 MG', '24 MG', 'Total'],
     ['Beehave', '','','','','','','rowTotal','NA','NA','NA','NA', '', '','','','','','rowTotal'],
     ['Blueberry Thrill', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
@@ -19,7 +19,7 @@ Template.spreadsheet.onRendered(function () {
     ['Pearnapple', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
     ['Scarlett Kiss', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
     ['Se7en', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['Soleéy', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Soleey', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
     ['Succer Punch', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
     ['TNT Gold', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
     ['TNT Menthol', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
@@ -37,10 +37,10 @@ Template.spreadsheet.onRendered(function () {
     ['VMD - Private Stock', '','','','','','rowTotal','NA','NA','NA','NA','NA', '','','','','','rowTotal', 'NA'],
     ['Total Bottles', 'NA','NA','NA','NA','NA','colTotal','colTotal', 'NA','NA','NA', 'colTotal', 'NA','NA','NA','NA','NA','colTotal','colTotal'],
     ['totalBottles', '', '', 'enoughBottles'],
-    ['Totals (Not a final invoice, does not include shipping)', '', '','','', '', '', 'Price Tiers:', '15ML', '30ML'],
-    ['15ML Premium Liquids', 'smallPrice','', 'Current Tier','','=IF(SUM(G34,H34,L34,R34,S34)>4999, "5000+", IF(SUM(G34,H34,L34,R34,S34) > 2499, "2500-4999", IF(SUM(G34,H34,L34,R34,S34) > 999, "1000-2499", IF(SUM(G34,H34,L34,R34,S34) > 249, "250-999", IF(SUM(G34,H34,L34,R34,S34) > 49, "50-249", "NA")))))',  '', '50-249', '$5.25', '$7.85'],
-    ['30ML Premium Liquids', 'largePrice', '', 'Bottles For Next Tier','','=IF(SUM(G34,H34,L34,R34,S34)>4999, "NA", IF(SUM(G34,H34,L34,R34,S34) > 2499, 5000 - SUM(G34,H34,L34,R34,S34), IF(SUM(G34,H34,L34,R34,S34) > 999, 2500 - SUM(G34,H34,L34,R34,S34), IF(SUM(G34,H34,L34,R34,S34) > 249, 1000 - SUM(G34,H34,L34,R34,S34), IF(SUM(G34,H34,L34,R34,S34) > 49, 250 - SUM(G34,H34,L34,R34,S34), 50 - SUM(G34,H34,L34,R34,S34))))))', '', '250-999', '$5.00', '$7.50'],
-    ['Dripper Fuel', 'dripperPrice', '', '', '', '','', '1000-2499', '$4.85', '$7.35'],
+    ['Totals (Not a final invoice, does not include shipping)', '', '','','', '', '', 'Price Tiers:', '15ML', '30ML', '', 'Flat Rate'],
+    ['15ML Premium Liquids', 'smallPrice','', 'Current Tier','','=IF(SUM(G34,H34,L34,R34,S34)>4999, "5000+", IF(SUM(G34,H34,L34,R34,S34) > 2499, "2500-4999", IF(SUM(G34,H34,L34,R34,S34) > 999, "1000-2499", IF(SUM(G34,H34,L34,R34,S34) > 249, "250-999", IF(SUM(G34,H34,L34,R34,S34) > 49, "50-249", "NA")))))',  '', '50-249', '$5.25', '$7.85','', 'Dripper Fuel','',  '$8.50'],
+    ['30ML Premium Liquids', 'largePrice', '', 'Bottles For Next Tier','','=IF(SUM(G34,H34,L34,R34,S34)>4999, "NA", IF(SUM(G34,H34,L34,R34,S34) > 2499, 5000 - SUM(G34,H34,L34,R34,S34), IF(SUM(G34,H34,L34,R34,S34) > 999, 2500 - SUM(G34,H34,L34,R34,S34), IF(SUM(G34,H34,L34,R34,S34) > 249, 1000 - SUM(G34,H34,L34,R34,S34), IF(SUM(G34,H34,L34,R34,S34) > 49, 250 - SUM(G34,H34,L34,R34,S34), 50 - SUM(G34,H34,L34,R34,S34))))))', '', '250-999', '$5.00', '$7.50','', 'Oak Aged 15ml','', '$7.00'],
+    ['Dripper Fuel', 'dripperPrice', '', '', '', '','', '1000-2499', '$4.85', '$7.35', '', 'Oak Aged 30ml','', '$10.00'],
     ['15ML Oak Aged', 'smallOakPrice', '', '', '', '','', '2500-4999', '$4.75', '$7.20'],
     ['30ML Oak Aged', 'largeOakPrice', '', '', '', '','', '5000+', '$4.50', '$7.05'],
     ['TOTAL PRICE', 'totalPrice']
@@ -213,22 +213,15 @@ Template.spreadsheet.onRendered(function () {
     colHeaders: true,
     contextMenu: false,
     formulas: true,
-    colWidths: [280, 60, 60, 60, 60, 70, 60, 80, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60],
+    colWidths: [180, 60, 60, 60, 60, 70, 60, 80, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60],
     beforeChange: function(changes, source) {
       for (var i = changes.length - 1; i >= 0; i--) {
-        if(changes[i][1] >= 1 && changes[i][1] <= 6 && changes[i][0] >= 2 && changes[i][0] <= 26) {
+        if(changes[i][1] >= 1 && changes[i][1] <= 17 && changes[i][0] >= 2 && changes[i][0] <= 26) {
           if(changes[i][3] % 5 != 0) {
             alert('Must be a multiple of 5');
             return false;
           }
         }
-        if(changes[i][1] >= 12 && changes[i][1] <= 17 && changes[i][0] >= 2 && changes[i][0] <= 26) {
-          if(changes[i][3] % 5 != 0) {
-            alert('Must be a multiple of 5');
-            return false;
-          }
-        }
-
       }
     },
     columns: [
@@ -237,10 +230,14 @@ Template.spreadsheet.onRendered(function () {
     mergeCells: [
       {row: 0, col: 1, rowspan: 1, colspan: 7},
       {row: 0, col: 8, rowspan: 1, colspan: 4},
+      {row: 35, col: 0, rowspan: 1, colspan: 3},
       {row: 0, col: 12, rowspan: 1, colspan: 7},
       {row: 27, col: 0, rowspan: 1, colspan: 19},
       {row: 36, col: 3, rowspan: 1, colspan: 2},
       {row: 37, col: 3, rowspan: 1, colspan: 2},
+      {row: 36, col: 11, rowspan: 1, colspan: 2},
+      {row: 37, col: 11, rowspan: 1, colspan: 2},
+      {row: 38, col: 11, rowspan: 1, colspan: 2},
       {row: 34, col: 3, rowspan: 1, colspan: 6}
     ],
     cells: function(row, col, prop) {
@@ -315,11 +312,9 @@ Template.spreadsheet.onRendered(function () {
     for (i=36; i < 41; i++) {
       total += parseFloat(ssInstance.getDataAtCell(i,1)) || 0;
     }
-    var orderId = Orders.insert({order : ssInstance.getData(), orderId: '', status: 'pending', total: total, numBottles: ssInstance.getDataAtCell(34,0)});
-    Router.go('/orders/view/' + orderId);
-  });
 
-  $('#test2').on('click', function() {
-    ssInstance.loadData(Session.get('table'));
+    var orderId = Orders.insert({order : ssInstance.getData(), orderId: '', status: 'pending', total: total, numBottles: ssInstance.getDataAtCell(34,0)});
+    Meteor.call('sendOrderEmail', orderId);
+    Router.go('/orders/view/' + orderId);
   });
 });

@@ -1,12 +1,29 @@
-Template.viewOrder.onRendered(function () {
+Template.viewOrderOutter.onCreated(function() {
+  this.subscribe('ordersById',Router.current().params._id);
+});
 
+Template.viewOrderOutter.events({
+  "click [data-action=print]": function(event, template) {
+    var instance = template.$('#wholesale').handsontable('getInstance');
+    var printPlugin = new HotTable.Plugins.Print(instance);
+    Meteor.pdf.save(printPlugin.printToHtml(), 'order');
+  }
+});
+
+Template.viewOrderOutter.helpers({
+  test : function() {
+    return 'testing';
+  }
+});
+
+Template.viewOrder.onRendered(function () {
   var currentOrder = Orders.findOne();
 
   var template = Template.instance();
 
   var spreadsheet = template.$('#wholesale');
   var data = currentOrder.order;
-  console.log(currentOrder);
+  data[0][0] = data[0][0] + ' - Order #' + currentOrder.orderId
   function valueRenderer(instance, td, row, col, prop, value, cellProperties) {
 
     if(value == 'NA') {
@@ -32,7 +49,7 @@ Template.viewOrder.onRendered(function () {
     colHeaders: true,
     contextMenu: false,
     formulas: true,
-    colWidths: [280, 60, 60, 60, 60, 70, 60, 80, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60],
+    colWidths: [180, 60, 60, 60, 60, 70, 60, 80, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60],
     afterValidate: function(isValid, value, row, prop, source) {
       console.log(isValid);
     },
@@ -59,6 +76,7 @@ Template.viewOrder.onRendered(function () {
     mergeCells: [
       {row: 0, col: 1, rowspan: 1, colspan: 7},
       {row: 0, col: 8, rowspan: 1, colspan: 4},
+      {row: 35, col: 0, rowspan: 1, colspan: 3},
       {row: 0, col: 12, rowspan: 1, colspan: 7},
       {row: 27, col: 0, rowspan: 1, colspan: 19},
       {row: 36, col: 3, rowspan: 1, colspan: 2},

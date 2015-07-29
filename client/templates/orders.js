@@ -1,10 +1,10 @@
 Template.orders.onCreated(function(){
-  this.subscribe('orders', {owner: Meteor.userId()});
+  this.subscribe('myOrders');
 });
 
 Template.orders.helpers({
   orders : function() {
-    return Orders.find({}, {sort: {createdAt: -1}});
+    return Orders.find({ownerId: Meteor.userId()}, {sort: {createdAt: -1}});
   },
   formatTime: function(value) {
     return moment(value).format('MM-DD-YYYY');

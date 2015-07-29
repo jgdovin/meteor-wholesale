@@ -48,3 +48,13 @@
 <template name="customerRowActions">
   <button class="btn btn-primary" data-action="view">View</button>
 </template>
+
+<template name="customerActions">
+  {{#unless approved}}
+    <button class="btn btn-primary" data-action="approve">Approve</button>
+  {{/unless}}
+  <button class="btn btn-success" data-action="edit">Edit</button>
+  {{#unless disabled}}
+    <button class="btn btn-danger" data-action="disable">Disable</button>
+  {{/unless}}
+</template>

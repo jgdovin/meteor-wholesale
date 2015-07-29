@@ -1,0 +1,24 @@
+<template name="userEdit">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">User Information</div>
+      <div class="panel-body">
+        <form id="userEdit">
+          <div class="form-group">
+            <label for="inputCompanyName">Company Name:</label>
+            <input type="text" class="form-control" name="companyName" value="{{userData.profile.companyName}}"/><br/>
+            <label for="inputEmail">Email:</label>
+            <input type="text" class="form-control" name="email" value="{{userData.emails.[0].address}}"/><br/>
+            <label for="inputPhone">Phone #:</label>
+            <input type="text" class="form-control" name="phone" value="{{userData.profile.phone}}"/>
+            <label for="inputComments">Comments:</label>
+            <textarea name="comment" class="form-control" id="comment" cols="30" rows="10">{{userData.comment}}</textarea>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

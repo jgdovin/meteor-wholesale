@@ -1,0 +1,32 @@
+<template name="pendingCustomers">
+  {{> tabular table=TabularTables.pendingCustomers class="table table-striped table-bordered table-condensed"}}
+</template>
+
+<template name="approvedCustomers">
+  {{> tabular table=TabularTables.approvedCustomers class="table table-striped table-bordered table-condensed"}}
+</template>
+
+<template name="disabledCustomers">
+  {{> tabular table=TabularTables.disabledCustomers class="table table-striped table-bordered table-condensed"}}
+</template>
+
+<template name="users">
+  <div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#pending" aria-controls="pending" role="tab"
+                                                data-toggle="tab">Pending</a></li>
+      <li role="presentation"><a href="#approved" aria-controls="approved" role="tab" data-toggle="tab">Approved</a></li>
+      <li role="presentation"><a href="#disabled" aria-controls="disabled" role="tab" data-toggle="tab">Disabled</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="pending">{{> pendingCustomers}}</div>
+      <div role="tabpanel" class="tab-pane" id="approved">{{> approvedCustomers}}</div>
+      <div role="tabpanel" class="tab-pane" id="disabled">{{> disabledCustomers}}</div>
+    </div>
+
+  </div>
+</template>

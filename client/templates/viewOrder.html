@@ -1,3 +1,12 @@
+<template name="viewOrderOutter">
+  <button class="btn btn-primary" data-action="print">Print</button>
+  <br/><br/>
+  {{#if Template.subscriptionsReady}}
+    {{> viewOrder}}
+  {{else}}
+    Loading...
+  {{/if}}
+</template>
 <template name="viewOrder">
   <div id="wholesale" class="col-md-pull-1">
 
