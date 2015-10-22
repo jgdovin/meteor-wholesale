@@ -43,6 +43,7 @@
     <button class="btn btn-success" data-action="complete">Complete</button>
   {{/unless}}
   <button class="btn btn-primary" data-action="view">View</button>
+  <button class="btn btn-danger" data-action="delete">Delete</button>
 </template>
 
 <template name="customerRowActions">
@@ -55,6 +56,7 @@
   {{/unless}}
   <button class="btn btn-success" data-action="edit">Edit</button>
   {{#unless disabled}}
-    <button class="btn btn-danger" data-action="disable">Disable</button>
+    <button class="btn btn-warning" data-action="disable">Disable</button>
   {{/unless}}
+  <button class="btn btn-danger" data-action="delete">Delete</button>
 </template>

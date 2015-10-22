@@ -5,6 +5,20 @@ Meteor.methods({
     }
     Orders.update(orderId, {$set: {status: status}});
   },
+  deleteOrder: function(orderId) {
+    if(!Meteor.user().isAdmin) {
+      throw new Meteor.Error(401, 'Invalid User');
+    } else {
+      Orders.remove({_id: orderId});
+    }
+  },
+  deleteCustomer: function(customerId) {
+    if(!Meteor.user().isAdmin || customerId == Meteor.userId()) {
+      throw new Meteor.Error(401, 'Invalid User');
+    } else {
+      Meteor.users.remove({_id: customerId});
+    }
+  },
   approveCustomer: function (customerId) {
     if(!Meteor.user().isAdmin) {
       throw new Meteor.Error("Not Authorized");

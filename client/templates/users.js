@@ -12,6 +12,13 @@ Template.customerActions.events({
     Router.go('/users/edit/' + this._id);
   },
   "click [data-action=disable]": function(event, template) {
+    event.preventDefault();
     Meteor.call("disableCustomer", this._id);
+  },
+  "click [data-action=delete]": function(event, template) {
+    event.preventDefault();
+    if(confirm('Are you sure you want to delete this user?')) {
+      Meteor.call("deleteCustomer", this._id);
+    }
   }
-})
+});
