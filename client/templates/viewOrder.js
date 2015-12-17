@@ -55,13 +55,13 @@ Template.viewOrder.onRendered(function () {
     },
     beforeChange: function(changes, source) {
       for (var i = changes.length - 1; i >= 0; i--) {
-        if(changes[i][1] >= 1 && changes[i][1] <= 6 && changes[i][0] >= 2 && changes[i][0] <= 26) {
+        if(changes[i][1] >= 1 && changes[i][1] <= 6 && changes[i][0] >= 2 && changes[i][0] <= 28) {
           if(changes[i][3] % 5 != 0) {
             alert('Must be a multiple of 5');
             return false;
           }
         }
-        if(changes[i][1] >= 12 && changes[i][1] <= 17 && changes[i][0] >= 2 && changes[i][0] <= 26) {
+        if(changes[i][1] >= 12 && changes[i][1] <= 17 && changes[i][0] >= 2 && changes[i][0] <= 28) {
           if(changes[i][3] % 5 != 0) {
             alert('Must be a multiple of 5');
             return false;
@@ -76,12 +76,12 @@ Template.viewOrder.onRendered(function () {
     mergeCells: [
       {row: 0, col: 1, rowspan: 1, colspan: 7},
       {row: 0, col: 8, rowspan: 1, colspan: 4},
-      {row: 35, col: 0, rowspan: 1, colspan: 3},
+      {row: 40, col: 0, rowspan: 1, colspan: 3},
       {row: 0, col: 12, rowspan: 1, colspan: 7},
-      {row: 27, col: 0, rowspan: 1, colspan: 19},
-      {row: 36, col: 3, rowspan: 1, colspan: 2},
-      {row: 37, col: 3, rowspan: 1, colspan: 2},
-      {row: 34, col: 3, rowspan: 1, colspan: 6}
+      {row: 33, col: 0, rowspan: 1, colspan: 19},
+      {row: 41, col: 3, rowspan: 1, colspan: 2},
+      {row: 42, col: 3, rowspan: 1, colspan: 2},
+      {row: 40, col: 3, rowspan: 1, colspan: 6}
     ],
     cells: function(row, col, prop) {
       var cellProperties = {};
@@ -90,7 +90,7 @@ Template.viewOrder.onRendered(function () {
 
       }
 
-      if (row === 27 && col ===0) {
+      if (row === 33 && col ===0) {
         cellProperties.renderer = 'valueRenderer';
       }
 
@@ -104,7 +104,7 @@ Template.viewOrder.onRendered(function () {
       return cellProperties;
     },
     cell: [
-      {row: 27, col: 0, className: 'htCenter aged'}
+      {row: 33, col: 0, className: 'htCenter aged'}
     ]
   });
 

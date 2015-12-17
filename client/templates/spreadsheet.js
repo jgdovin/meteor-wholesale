@@ -13,7 +13,12 @@ Template.spreadsheet.onRendered(function () {
     ['Coolcumber', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
     ['Grapevape', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
     ['Heisenberg (The Blue)', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
+    ['Heisenberg (Natural)', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
     ['Heisenberg Menthol', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Heisenberg Menthol (Natural)', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Hippie Puffs', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
+    ['Holiday', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Key Largo', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
     ['Miami Nice', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
     ['Mocha Javape', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
     ['Pearnapple', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
@@ -39,8 +44,8 @@ Template.spreadsheet.onRendered(function () {
     ['Total Bottles', 'NA','NA','NA','NA','NA','colTotal','colTotal', 'NA','NA','NA', 'colTotal', 'NA','NA','NA','NA','NA','colTotal','colTotal'],
     ['totalBottles', '', '', 'enoughBottles'],
     ['Totals (Not a final invoice, does not include shipping)', '', '','','', '', '', 'Price Tiers:', '15ML', '30ML', '', 'Flat Rate'],
-    ['15ML Premium Liquids', 'smallPrice','', 'Current Tier','','=IF(SUM(G35,H35,L35,R35,S35)>4999, "5000+", IF(SUM(G35,H35,L35,R35,S35) > 2499, "2500-4999", IF(SUM(G35,H35,L35,R35,S35) > 999, "1000-2499", IF(SUM(G35,H35,L35,R35,S35) > 249, "250-999", IF(SUM(G35,H35,L35,R35,S35) > 49, "50-249", "NA")))))',  '', '50-249', '$5.25', '$7.85','', 'Dripper Fuel','',  '$8.50'],
-    ['30ML Premium Liquids', 'largePrice', '', 'Bottles For Next Tier','','=IF(SUM(G35,H35,L35,R35,S35)>4999, "NA", IF(SUM(G35,H35,L35,R35,S35) > 2499, 5000 - SUM(G35,H35,L35,R35,S35), IF(SUM(G35,H35,L35,R35,S35) > 999, 2500 - SUM(G35,H35,L35,R35,S35), IF(SUM(G35,H35,L35,R35,S35) > 249, 1000 - SUM(G35,H35,L35,R35,S35), IF(SUM(G35,H35,L35,R35,S35) > 49, 250 - SUM(G35,H35,L35,R35,S35), 50 - SUM(G35,H35,L35,R35,S35))))))', '', '250-999', '$5.00', '$7.50','', 'Oak Aged 15ml','', '$7.00'],
+    ['15ML Premium Liquids', 'smallPrice','', 'Current Tier','','=IF(SUM(G40,H40,L40,R40,S40)>4999, "5000+", IF(SUM(G40,H40,L40,R40,S40) > 2499, "2500-4999", IF(SUM(G40,H40,L40,R40,S40) > 999, "1000-2499", IF(SUM(G40,H40,L40,R40,S40) > 249, "250-999", IF(SUM(G40,H40,L40,R40,S40) > 49, "50-249", "NA")))))',  '', '50-249', '$5.25', '$7.85','', 'Dripper Fuel','',  '$8.50'],
+    ['30ML Premium Liquids', 'largePrice', '', 'Bottles For Next Tier','','=IF(SUM(G40,H40,L40,R40,S40)>4999, "NA", IF(SUM(G40,H40,L40,R40,S40) > 2499, 5000 - SUM(G40,H40,L40,R40,S40), IF(SUM(G40,H40,L40,R40,S40) > 999, 2500 - SUM(G40,H40,L40,R40,S40), IF(SUM(G40,H40,L40,R40,S40) > 249, 1000 - SUM(G40,H40,L40,R40,S40), IF(SUM(G40,H40,L40,R40,S40) > 49, 250 - SUM(G40,H40,L40,R40,S40), 50 - SUM(G40,H40,L40,R40,S40))))))', '', '250-999', '$5.00', '$7.50','', 'Oak Aged 15ml','', '$7.00'],
     ['Dripper Fuel', 'dripperPrice', '', '', '', '','', '1000-2499', '$4.85', '$7.35', '', 'Oak Aged 30ml','', '$10.00'],
     ['15ML Oak Aged', 'smallOakPrice', '', '', '', '','', '2500-4999', '$4.75', '$7.20'],
     ['30ML Oak Aged', 'largeOakPrice', '', '', '', '','', '5000+', '$4.50', '$7.05'],
@@ -112,7 +117,7 @@ Template.spreadsheet.onRendered(function () {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
     td.style.color = "#ffffff";
     td.align = "center";
-    if(instance.getDataAtCell(35,0) >= 50) {
+    if(instance.getDataAtCell(40,0) >= 50) {
       td.innerHTML = "Minimum Bottle Requirement Reached";
       td.style.background = "#51A351";
       $('[data-action="saveOrder"]').prop("disabled",false);
@@ -126,8 +131,8 @@ Template.spreadsheet.onRendered(function () {
 
   function smallPriceRenderer(instance, td, row, col, prop, value, cellProperties) {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
-    var bottles = parseInt(instance.getDataAtCell(34, 7));
-    var totalBottles = parseInt(instance.getDataAtCell(35,0));
+    var bottles = parseInt(instance.getDataAtCell(39, 7));
+    var totalBottles = parseInt(instance.getDataAtCell(40,0));
     var price = 5.25;
     if(totalBottles >= 5000) {
       price = 4.50;
@@ -145,8 +150,8 @@ Template.spreadsheet.onRendered(function () {
 
   function largePriceRenderer(instance, td, row, col, prop, value, cellProperties) {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
-    var bottles = parseInt(instance.getDataAtCell(34, 18));
-    var totalBottles = parseInt(instance.getDataAtCell(35,0));
+    var bottles = parseInt(instance.getDataAtCell(39, 18));
+    var totalBottles = parseInt(instance.getDataAtCell(40,0));
     var price = 7.85;
     if(totalBottles >= 5000) {
       price = 7.05;
@@ -164,7 +169,7 @@ Template.spreadsheet.onRendered(function () {
 
   function dripperPriceRenderer(instance, td, row, col, prop, value, cellProperties) {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
-    var bottles = parseInt(instance.getDataAtCell(34, 11));
+    var bottles = parseInt(instance.getDataAtCell(39, 11));
     total = bottles * 8.50;
     data[row][col] = accounting.formatNumber(total, 2, '');
     td.innerHTML = accounting.formatMoney(total);
@@ -172,7 +177,7 @@ Template.spreadsheet.onRendered(function () {
 
   function smallOakPriceRenderer(instance, td, row, col, prop, value, cellProperties) {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
-    var bottles = parseInt(instance.getDataAtCell(34, 6));
+    var bottles = parseInt(instance.getDataAtCell(39, 6));
     total = bottles * 7;
     data[row][col] = accounting.formatNumber(total, 2, '');
     td.innerHTML = accounting.formatMoney(total);
@@ -180,7 +185,7 @@ Template.spreadsheet.onRendered(function () {
 
   function largeOakPriceRenderer(instance, td, row, col, prop, value, cellProperties) {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
-    var bottles = parseInt(instance.getDataAtCell(34, 17));
+    var bottles = parseInt(instance.getDataAtCell(39, 17));
     total = bottles * 10;
     data[row][col] = accounting.formatNumber(total, 2, '');
     td.innerHTML = accounting.formatMoney(total);
@@ -217,7 +222,7 @@ Template.spreadsheet.onRendered(function () {
     colWidths: [180, 60, 60, 60, 60, 70, 60, 80, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60],
     beforeChange: function(changes, source) {
       for (var i = changes.length - 1; i >= 0; i--) {
-        if(changes[i][1] >= 1 && changes[i][1] <= 17 && changes[i][0] >= 2 && changes[i][0] <= 27) {
+        if(changes[i][1] >= 1 && changes[i][1] <= 17 && changes[i][0] >= 2 && changes[i][0] <= 32) {
           if(changes[i][3] % 5 != 0) {
             alert('Must be a multiple of 5');
             return false;
@@ -231,15 +236,15 @@ Template.spreadsheet.onRendered(function () {
     mergeCells: [
       {row: 0, col: 1, rowspan: 1, colspan: 7},
       {row: 0, col: 8, rowspan: 1, colspan: 4},
-      {row: 36, col: 0, rowspan: 1, colspan: 3},
+      {row: 41, col: 0, rowspan: 1, colspan: 3},
       {row: 0, col: 12, rowspan: 1, colspan: 7},
-      {row: 28, col: 0, rowspan: 1, colspan: 19},
-      {row: 36, col: 3, rowspan: 1, colspan: 2},
-      {row: 38, col: 3, rowspan: 1, colspan: 2},
-      {row: 37, col: 11, rowspan: 1, colspan: 2},
-      {row: 38, col: 11, rowspan: 1, colspan: 2},
-      {row: 39, col: 11, rowspan: 1, colspan: 2},
-      {row: 35, col: 3, rowspan: 1, colspan: 6}
+      {row: 33, col: 0, rowspan: 1, colspan: 19},
+      {row: 41, col: 3, rowspan: 1, colspan: 2},
+      {row: 43, col: 3, rowspan: 1, colspan: 2},
+      {row: 42, col: 11, rowspan: 1, colspan: 2},
+      {row: 43, col: 11, rowspan: 1, colspan: 2},
+      {row: 44, col: 11, rowspan: 1, colspan: 2},
+      {row: 40, col: 3, rowspan: 1, colspan: 6}
     ],
     cells: function(row, col, prop) {
       var cellProperties = {};
@@ -248,7 +253,7 @@ Template.spreadsheet.onRendered(function () {
 
       }
 
-      if (row === 28 && col ===0) {
+      if (row === 30 && col ===0) {
         cellProperties.renderer = 'valueRenderer';
       }
 
@@ -302,7 +307,7 @@ Template.spreadsheet.onRendered(function () {
       return cellProperties;
     },
     cell: [
-      {row: 28, col: 0, className: 'htCenter aged'}
+      {row: 33, col: 0, className: 'htCenter aged'}
     ]
   });
 
@@ -310,11 +315,11 @@ Template.spreadsheet.onRendered(function () {
   $('#wholesale').find('table').addClass('zebraStyle');
   $('[data-action="saveOrder"]').on('click', function() {
     var total = 0;
-    for (i=36; i < 42; i++) {
+    for (i=42; i < 47; i++) {
       total += parseFloat(ssInstance.getDataAtCell(i,1)) || 0;
     }
 
-    var orderId = Orders.insert({order : ssInstance.getData(), orderId: '', status: 'pending', total: total, numBottles: ssInstance.getDataAtCell(35,0)});
+    var orderId = Orders.insert({order : ssInstance.getData(), orderId: '', status: 'pending', total: total, numBottles: ssInstance.getDataAtCell(40,0)});
     Meteor.call('sendOrderEmail', orderId);
     Router.go('/orders/view/' + orderId);
   });
