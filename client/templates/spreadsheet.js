@@ -2,53 +2,54 @@ Template.spreadsheet.onRendered(function () {
   var template = Template.instance();
   var spreadsheet = template.$('#wholesale');
   var data = [
-    [Meteor.user().profile['companyName'], "15 ML Bottles", "", "", "", "", "", "", "Dripper Fuel", "", "", "", "30 ML Bottles", "", "", "", "", "", ""],
-    [moment().format('MM-DD-YYYY'), '0 MG', '3 MG', '6 MG', '12 MG', '18 MG', '24 MG', 'Total', '0 DF', '3 DF', '6 DF', 'Total', '0 MG', '3 MG', '6 MG', '12 MG', '18 MG', '24 MG', 'Total'],
-    ['Beehave', '','','','','','','rowTotal','NA','NA','NA','NA', '', '','','','','','rowTotal'],
-    ['Blueberry Thrill', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['Caramel Vapeuccino', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['Carousel', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
-    ['Cherry Bomb', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['Chill Out', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['Coolcumber', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['Grapevape', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['Heisenberg (The Blue)', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
-    ['Heisenberg (Natural)', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
-    ['Heisenberg Menthol', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['Heisenberg Menthol (Natural)', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['Hippie Puffs', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
-    ['Holiday', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['Key Largo', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
-    ['Miami Nice', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['Mocha Javape', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['Pearnapple', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
-    ['Roadrip', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
-    ['Scarlett Kiss', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
-    ['Se7en', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['Soley', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['Succer Punch', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
-    ['TNT Gold', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['TNT Menthol', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['TNT Red', '','','','','','','rowTotal','NA','NA','NA','NA', '','','','','','','rowTotal'],
-    ['Vaperception', '','','','','','','rowTotal','NA','NA','NA','NA','', '','','','','','rowTotal'],
-    ['Vapetrix', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
-    ['VMD (Vape My Day)', '','','','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
-    ['Watermelenthol', '','','','','','','rowTotal','NA','NA','NA','NA','', '','','','','','rowTotal'],
-    ['Watermelony', '','','','','','','rowTotal','NA','NA','NA','NA','', '','','','','','rowTotal'],
+    [Meteor.user().profile['companyName'], "15 ML Bottles", "", "", "", "", "", "", "Dripper Fuel", "", "", "","Dripper Fuel", "", "", "",  "30 ML Bottles", "", "", "", "", "", ""],
+    [moment().format('MM-DD-YYYY'), '0 MG', '3 MG', '6 MG', '12 MG', '18 MG', '24 MG', 'Total', '0 DF', '3 DF', '6 DF', 'Total', '0 DF', '3 DF', '6 DF', 'Total', '0 MG', '3 MG', '6 MG', '12 MG', '18 MG', '24 MG', 'Total'],
+    ['Beehave', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '', '','','','','','rowTotal'],
+    ['Blueberry Thrill', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Caramel Vapeuccino', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Carousel', '','','','','','','rowTotal','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
+    ['Cherry Bomb', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Chill Out', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Coolcumber', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Grapevape', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Heisenberg (The Blue)', '','','','','','','rowTotal','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
+    ['Heisenberg (Natural)', '','','','','','','rowTotal','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
+    ['Heisenberg Menthol', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Heisenberg Menthol (Natural)', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Hippie Puffs', '','','','','','','rowTotal','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
+    ['Holiday', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Key Largo', '','','','','','','rowTotal','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
+    ['Miami Nice', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Mocha Javape', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Pearnapple', '','','','','','','rowTotal','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
+    ['Roadrip', '','','','','','','rowTotal','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
+    ['Scarlett Kiss', '','','','','','','rowTotal','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
+    ['Se7en', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Soley', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Succer Punch', '','','','','','','rowTotal','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
+    ['TNT Gold', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['TNT Menthol', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['TNT Red', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','','rowTotal'],
+    ['Vaperception', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA','', '','','','','','rowTotal'],
+    ['Vapetrix', '','','','','','','rowTotal','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
+    ['VMD (Vape My Day)', '','','','','','','rowTotal','','','','rowTotal','','','','rowTotal', '','','','','','','rowTotal'],
+    ['Watermelenthol', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA','', '','','','','','rowTotal'],
+    ['Watermelony', '','','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA','', '','','','','','rowTotal'],
     ['Oak Age Blend - 15 & 30 ml Bottles'],
-    ['Elegante', '','','','','','rowTotal','NA','NA','NA','NA','NA', '','','','','','rowTotal', 'NA'],
-    ['General Custard', '','','','','','rowTotal','NA','NA','NA','NA','NA', '','','','','','rowTotal', 'NA'],
-    ['Shanghai', '','','','','','rowTotal','NA','NA','NA','NA','NA', '','','','','','rowTotal', 'NA'],
-    ['Triple Crown', '','','','','','rowTotal','NA','NA','NA','NA','NA', '','','','','','rowTotal', 'NA'],
-    ['VMD - Private Stock', '','','','','','rowTotal','NA','NA','NA','NA','NA', '','','','','','rowTotal', 'NA'],
-    ['Total Bottles', 'NA','NA','NA','NA','NA','colTotal','colTotal', 'NA','NA','NA', 'colTotal', 'NA','NA','NA','NA','NA','colTotal','colTotal'],
+    ['Elegante', '','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','rowTotal', 'NA'],
+    ['General Custard', '','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','rowTotal', 'NA'],
+    ['Shanghai', '','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','rowTotal', 'NA'],
+    ['Triple Crown', '','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','rowTotal', 'NA'],
+    ['VMD - Private Stock', '','','','','','rowTotal','NA','NA','NA','NA','NA','NA','NA','NA','NA', '','','','','','rowTotal', 'NA'],
+    ['Total Bottles', 'NA','NA','NA','NA','NA','colTotal','colTotal', 'NA','NA','NA', 'colTotal','NA','NA','NA', 'colTotal', 'NA','NA','NA','NA','NA','colTotal','colTotal'],
     ['totalBottles', '', '', 'enoughBottles'],
     ['Totals (Not a final invoice, does not include shipping)', '', '','','', '', '', 'Price Tiers:', '15ML', '30ML', '', 'Flat Rate'],
-    ['15ML Premium Liquids', 'smallPrice','', 'Current Tier','','=IF(SUM(G40,H40,L40,R40,S40)>4999, "5000+", IF(SUM(G40,H40,L40,R40,S40) > 2499, "2500-4999", IF(SUM(G40,H40,L40,R40,S40) > 999, "1000-2499", IF(SUM(G40,H40,L40,R40,S40) > 249, "250-999", IF(SUM(G40,H40,L40,R40,S40) > 49, "50-249", "NA")))))',  '', '50-249', '$5.25', '$7.85','', 'Dripper Fuel','',  '$8.50'],
-    ['30ML Premium Liquids', 'largePrice', '', 'Bottles For Next Tier','','=IF(SUM(G40,H40,L40,R40,S40)>4999, "NA", IF(SUM(G40,H40,L40,R40,S40) > 2499, 5000 - SUM(G40,H40,L40,R40,S40), IF(SUM(G40,H40,L40,R40,S40) > 999, 2500 - SUM(G40,H40,L40,R40,S40), IF(SUM(G40,H40,L40,R40,S40) > 249, 1000 - SUM(G40,H40,L40,R40,S40), IF(SUM(G40,H40,L40,R40,S40) > 49, 250 - SUM(G40,H40,L40,R40,S40), 50 - SUM(G40,H40,L40,R40,S40))))))', '', '250-999', '$5.00', '$7.50','', 'Oak Aged 15ml','', '$7.00'],
-    ['Dripper Fuel', 'dripperPrice', '', '', '', '','', '1000-2499', '$4.85', '$7.35', '', 'Oak Aged 30ml','', '$10.00'],
-    ['15ML Oak Aged', 'smallOakPrice', '', '', '', '','', '2500-4999', '$4.75', '$7.20'],
-    ['30ML Oak Aged', 'largeOakPrice', '', '', '', '','', '5000+', '$4.50', '$7.05'],
+    ['15ML Premium Liquids', 'smallPrice','', 'Current Tier','','=IF(SUM(G40,H40,L40,P40,V40,W40)>4999, "5000+", IF(SUM(G40,H40,L40,P40,V40,W40) > 2499, "2500-4999", IF(SUM(G40,H40,L40,P40,V40,W40) > 999, "1000-2499", IF(SUM(G40,H40,L40,P40,V40,W40) > 249, "250-999", IF(SUM(G40,H40,L40,P40,V40,W40) > 49, "50-249", "NA")))))',  '', '50-249', '$5.25', '$7.85','', 'Dripper Fuel (30ml)','',  '$8.50'],
+    ['30ML Premium Liquids', 'largePrice', '', 'Bottles For Next Tier','','=IF(SUM(G40,H40,L40,P40,V40,W40)>4999, "NA", IF(SUM(G40,H40,L40,P40,V40,W40) > 2499, 5000 - SUM(G40,H40,L40,P40,V40,W40), IF(SUM(G40,H40,L40,P40,V40,W40) > 999, 2500 - SUM(G40,H40,L40,P40,V40,W40), IF(SUM(G40,H40,L40,P40,V40,W40) > 249, 1000 - SUM(G40,H40,L40,P40,V40,W40), IF(SUM(G40,H40,L40,P40,V40,W40) > 49, 250 - SUM(G40,H40,L40,P40,V40,W40), 50 - SUM(G40,H40,L40,P40,V40,W40))))))', '', '250-999', '$5.00', '$7.50','', 'Dripper Fuel (120ml)','', '$25.50'],
+    ['Dripper Fuel (30ml)', 'dripperPrice', '', '', '', '','', '1000-2499', '$4.85', '$7.35', '', 'Oak Aged 15ml','', '$7.00'],
+    ['Dripper Fuel (120ml)', 'dripperPriceLarge', '', '', '', '','', '2500-4999', '$4.75', '$7.20', '', 'Oak Aged 30ml','', '$10.00'],
+    ['15ML Oak Aged', 'smallOakPrice', '', '', '', '','', '5000+', '$4.50', '$7.05'],
+    ['30ML Oak Aged', 'largeOakPrice'],
     ['TOTAL PRICE', 'totalPrice']
 
   ];
@@ -72,7 +73,7 @@ Template.spreadsheet.onRendered(function () {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
     total = 0;
     var numRows = row;
-    if(col === 6 || col === 17) {
+    if(col === 6 || col === 21) {
       numRows = 5;
     }
     for(i = row - numRows; i < row; i++) {
@@ -87,9 +88,9 @@ Template.spreadsheet.onRendered(function () {
 
     total = 0;
     var cell = 0;
-    if(col === 7 || col === 18) {
+    if(col === 7 || col === 22) {
       var numColumns = 6;
-    } else if (col === 11) {
+    } else if (col === 11 || col === 15) {
       var numColumns = 3;
     } else {
       var numColumns = 5;
@@ -150,7 +151,7 @@ Template.spreadsheet.onRendered(function () {
 
   function largePriceRenderer(instance, td, row, col, prop, value, cellProperties) {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
-    var bottles = parseInt(instance.getDataAtCell(39, 18));
+    var bottles = parseInt(instance.getDataAtCell(39, 22));
     var totalBottles = parseInt(instance.getDataAtCell(40,0));
     var price = 7.85;
     if(totalBottles >= 5000) {
@@ -174,6 +175,13 @@ Template.spreadsheet.onRendered(function () {
     data[row][col] = accounting.formatNumber(total, 2, '');
     td.innerHTML = accounting.formatMoney(total);
   }
+  function dripperPriceLargeRenderer(instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
+    var bottles = parseInt(instance.getDataAtCell(39, 15));
+    total = bottles * 25.50;
+    data[row][col] = accounting.formatNumber(total, 2, '');
+    td.innerHTML = accounting.formatMoney(total);
+  }
 
   function smallOakPriceRenderer(instance, td, row, col, prop, value, cellProperties) {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
@@ -185,7 +193,7 @@ Template.spreadsheet.onRendered(function () {
 
   function largeOakPriceRenderer(instance, td, row, col, prop, value, cellProperties) {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
-    var bottles = parseInt(instance.getDataAtCell(39, 17));
+    var bottles = parseInt(instance.getDataAtCell(39, 21));
     total = bottles * 10;
     data[row][col] = accounting.formatNumber(total, 2, '');
     td.innerHTML = accounting.formatMoney(total);
@@ -194,7 +202,7 @@ Template.spreadsheet.onRendered(function () {
   function totalPriceRenderer(instance, td, row, col, prop, value, cellProperties) {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
     var total = 0;
-    for (i=row - 5; i < row; i++) {
+    for (i=row - 6; i < row; i++) {
       total += parseFloat(instance.getDataAtCell(i,1)) || 0;
     }
     data[row][col] = accounting.formatNumber(total, 2);
@@ -209,6 +217,7 @@ Template.spreadsheet.onRendered(function () {
   Handsontable.renderers.registerRenderer('smallPriceRenderer', smallPriceRenderer);
   Handsontable.renderers.registerRenderer('largePriceRenderer', largePriceRenderer);
   Handsontable.renderers.registerRenderer('dripperPriceRenderer', dripperPriceRenderer);
+  Handsontable.renderers.registerRenderer('dripperPriceLargeRenderer', dripperPriceLargeRenderer);
   Handsontable.renderers.registerRenderer('smallOakPriceRenderer', smallOakPriceRenderer);
   Handsontable.renderers.registerRenderer('largeOakPriceRenderer', largeOakPriceRenderer);
   Handsontable.renderers.registerRenderer('totalPriceRenderer', totalPriceRenderer);
@@ -219,7 +228,7 @@ Template.spreadsheet.onRendered(function () {
     colHeaders: true,
     contextMenu: false,
     formulas: true,
-    colWidths: [180, 60, 60, 60, 60, 70, 60, 80, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60],
+    colWidths: [130, 50, 50, 50, 50, 60, 50, 70, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50,50,50,50,50,50,50],
     beforeChange: function(changes, source) {
       for (var i = changes.length - 1; i >= 0; i--) {
         if(changes[i][1] >= 1 && changes[i][1] <= 17 && changes[i][0] >= 2 && changes[i][0] <= 32) {
@@ -231,19 +240,21 @@ Template.spreadsheet.onRendered(function () {
       }
     },
     columns: [
-      {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}
+      {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}
     ],
     mergeCells: [
       {row: 0, col: 1, rowspan: 1, colspan: 7},
       {row: 0, col: 8, rowspan: 1, colspan: 4},
-      {row: 41, col: 0, rowspan: 1, colspan: 3},
-      {row: 0, col: 12, rowspan: 1, colspan: 7},
-      {row: 33, col: 0, rowspan: 1, colspan: 19},
-      {row: 41, col: 3, rowspan: 1, colspan: 2},
+      {row: 41, col: 0, rowspan: 1, colspan: 4},
+      {row: 0, col: 12, rowspan: 1, colspan: 4},
+      {row: 0, col: 16, rowspan: 1, colspan: 7},
+      {row: 33, col: 0, rowspan: 1, colspan: 23},
+      {row: 42, col: 3, rowspan: 1, colspan: 2},
       {row: 43, col: 3, rowspan: 1, colspan: 2},
       {row: 42, col: 11, rowspan: 1, colspan: 2},
       {row: 43, col: 11, rowspan: 1, colspan: 2},
       {row: 44, col: 11, rowspan: 1, colspan: 2},
+      {row: 45, col: 11, rowspan: 1, colspan: 2},
       {row: 40, col: 3, rowspan: 1, colspan: 6}
     ],
     cells: function(row, col, prop) {
@@ -291,6 +302,10 @@ Template.spreadsheet.onRendered(function () {
         cellProperties.renderer = "dripperPriceRenderer";
         cellProperties.readOnly = true;
       }
+      if(this.instance.getData()[row][col] === 'dripperPriceLarge') {
+        cellProperties.renderer = "dripperPriceLargeRenderer";
+        cellProperties.readOnly = true;
+      }
       if(this.instance.getData()[row][col] === 'smallOakPrice') {
         cellProperties.renderer = "smallOakPriceRenderer";
         cellProperties.readOnly = true;
@@ -315,7 +330,7 @@ Template.spreadsheet.onRendered(function () {
   $('#wholesale').find('table').addClass('zebraStyle');
   $('[data-action="saveOrder"]').on('click', function() {
     var total = 0;
-    for (i=42; i < 47; i++) {
+    for (i=42; i < 48; i++) {
       total += parseFloat(ssInstance.getDataAtCell(i,1)) || 0;
     }
 

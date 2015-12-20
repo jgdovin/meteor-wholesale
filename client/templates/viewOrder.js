@@ -49,7 +49,7 @@ Template.viewOrder.onRendered(function () {
     colHeaders: true,
     contextMenu: false,
     formulas: true,
-    colWidths: [180, 60, 60, 60, 60, 70, 60, 80, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60],
+    colWidths: [130, 50, 50, 50, 50, 60, 50, 70, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50,50,50,50,50,50,50],
     afterValidate: function(isValid, value, row, prop, source) {
       console.log(isValid);
     },
@@ -71,16 +71,21 @@ Template.viewOrder.onRendered(function () {
       }
     },
     columns: [
-      {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}
+      {},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}
     ],
     mergeCells: [
       {row: 0, col: 1, rowspan: 1, colspan: 7},
       {row: 0, col: 8, rowspan: 1, colspan: 4},
-      {row: 40, col: 0, rowspan: 1, colspan: 3},
-      {row: 0, col: 12, rowspan: 1, colspan: 7},
-      {row: 33, col: 0, rowspan: 1, colspan: 19},
-      {row: 41, col: 3, rowspan: 1, colspan: 2},
+      {row: 41, col: 0, rowspan: 1, colspan: 4},
+      {row: 0, col: 12, rowspan: 1, colspan: 4},
+      {row: 0, col: 16, rowspan: 1, colspan: 7},
+      {row: 33, col: 0, rowspan: 1, colspan: 23},
       {row: 42, col: 3, rowspan: 1, colspan: 2},
+      {row: 43, col: 3, rowspan: 1, colspan: 2},
+      {row: 42, col: 11, rowspan: 1, colspan: 2},
+      {row: 43, col: 11, rowspan: 1, colspan: 2},
+      {row: 44, col: 11, rowspan: 1, colspan: 2},
+      {row: 45, col: 11, rowspan: 1, colspan: 2},
       {row: 40, col: 3, rowspan: 1, colspan: 6}
     ],
     cells: function(row, col, prop) {
